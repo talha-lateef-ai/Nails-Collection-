@@ -36,7 +36,12 @@ st.write('Choose a design below. Prices shown are dummy prices and can be change
 columns = st.columns(3)
 for index, product in enumerate(PRODUCTS):
     with columns[index % 3]:
-        st.image(str(Path('images') / product['image']), use_container_width=True)
+        image_path = Path(__file__).parent / "images" / product["image"]
+
+st.image(
+    str(image_path),
+    use_container_width=True
+)
         st.markdown(f"### {product['name']}")
         st.markdown(f"<div class='price'>PKR {product['price']:,}</div>", unsafe_allow_html=True)
         st.markdown(f"<div class='description'>{product['description']}</div>", unsafe_allow_html=True)
