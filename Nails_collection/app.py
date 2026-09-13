@@ -2,6 +2,7 @@ import streamlit as st
 from pathlib import Path
 from urllib.parse import quote
 
+
 # ============================================================
 # 1. PAGE CONFIGURATION
 # ============================================================
@@ -10,7 +11,6 @@ st.set_page_config(
     page_title="Nails Collection",
     page_icon="💅",
     layout="wide",
-    initial_sidebar_state="collapsed",
 )
 
 
@@ -24,7 +24,7 @@ WHATSAPP_NUMBER = "923289718577"
 
 
 # ============================================================
-# 3. PRODUCT COLLECTION
+# 3. PRODUCTS
 # ============================================================
 
 PRODUCTS = [
@@ -68,10 +68,11 @@ PRODUCTS = [
 
 
 # ============================================================
-# 4. FILE PATHS
+# 4. IMAGE FOLDER PATH
 # ============================================================
 
-# This fixes the Streamlit Cloud image-path error.
+# This makes sure images work correctly on Streamlit Cloud.
+
 BASE_DIR = Path(__file__).parent
 IMAGE_DIR = BASE_DIR / "images"
 
@@ -83,6 +84,8 @@ IMAGE_DIR = BASE_DIR / "images"
 st.markdown(
     """
     <style>
+
+    /* Main Website Title */
     .main-title {
         text-align: center;
         font-size: 48px;
@@ -90,24 +93,37 @@ st.markdown(
         margin-bottom: 5px;
     }
 
+    /* Website Subtitle */
     .subtitle {
         text-align: center;
         font-size: 19px;
         margin-bottom: 30px;
     }
 
-    .price {
-        font-size: 22px;
+    /* Product Name */
+    .product-title {
+        text-align: center;
+        font-size: 20px;
         font-weight: 700;
-        margin: 8px 0;
+        margin-top: 10px;
     }
 
+    /* Product Price */
+    .price {
+        text-align: center;
+        font-size: 20px;
+        font-weight: 700;
+        margin: 5px 0;
+    }
+
+    /* Product Description */
     .description {
-        font-size: 16px;
-        min-height: 55px;
-        margin-bottom: 12px;
+        text-align: center;
+        font-size: 15px;
+        min-height: 48px;
     }
 
+    /* Contact Box */
     .contact-box {
         text-align: center;
         padding: 25px;
@@ -116,12 +132,14 @@ st.markdown(
         border: 1px solid rgba(128, 128, 128, 0.35);
     }
 
+    /* Footer */
     .footer {
         text-align: center;
         margin-top: 35px;
         padding: 15px;
         opacity: 0.75;
     }
+
     </style>
     """,
     unsafe_allow_html=True,
@@ -134,10 +152,13 @@ st.markdown(
 
 st.markdown(
     f"""
-    <div class="main-title">💅 {STORE_NAME}</div>
+    <div class="main-title">
+        💅 {STORE_NAME}
+    </div>
+
     <div class="subtitle">
-        Discover beautiful, stylish and elegant nail designs made
-        to complete your look.
+        Discover beautiful, stylish and elegant nail designs
+        made to complete your look.
     </div>
     """,
     unsafe_allow_html=True,
@@ -149,78 +170,130 @@ st.markdown(
 # ============================================================
 
 st.markdown("## ✨ Our Nail Collection")
-st.write("Choose your favorite design and click **Order** to place your order.")
+
+st.write(
+    "Browse our complete collection and choose your favorite design."
+)
 
 
 # ============================================================
-# 8. PRODUCT DISPLAY
+# 8. PRODUCT PHOTO GRID
 # ============================================================
 
+# 3 columns = 3 products per row.
 columns = st.columns(3)
+
 
 for index, product in enumerate(PRODUCTS):
 
     with columns[index % 3]:
 
+        # ----------------------------------------------------
+        # Image
+        # ----------------------------------------------------
+
         image_path = IMAGE_DIR / product["image"]
 
         if image_path.exists():
+
             st.image(
                 str(image_path),
-                use_container_width=True,
+                width=300,
             )
+
         else:
-            st.error(f"Image not found: {product['image']}")
 
-        st.markdown(f"### {product['name']}")
+            st.error(
+                f"Image not found: {product['image']}"
+            )
+
+
+        # ----------------------------------------------------
+        # Product Name
+        # ----------------------------------------------------
 
         st.markdown(
-            f"<div class='price'>PKR {product['price']:,}</div>",
+            f"""
+            <div class="product-title">
+                {product['name']}
+            </div>
+            """,
             unsafe_allow_html=True,
         )
 
+
+        # ----------------------------------------------------
+        # Price
+        # ----------------------------------------------------
+
         st.markdown(
-            f"<div class='description'>{product['description']}</div>",
+            f"""
+            <div class="price">
+                PKR {product['price']:,}
+            </div>
+            """,
             unsafe_allow_html=True,
         )
 
-        # Create a separate WhatsApp order message for each product.
-        message = quote(
-            f"Hello {STORE_NAME}! "
-            f"I would like to order: "
-            f"{product['name']} "
-            f"(PKR {product['price']:,})."
-        )
 
-        # ORDER BUTTON ONLY under each product.
-        st.link_button(
-            "🛍️ Order",
-            f"https://wa.me/{WHATSAPP_NUMBER}?text={message}",
-            use_container_width=True,
-        )
+        # ----------------------------------------------------
+        # Description
+        # ----------------------------------------------------
 
-        st.divider()
+        st.markdown(
+            f"""
+            <div class="description">
+                {product['description']}
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
 
 # ============================================================
-# 9. CONTACT SECTION
-#    CONTACT BUTTON APPEARS ONLY ONCE
+# 9. ONE ORDER BUTTON ONLY
+# ============================================================
+
+order_message = quote(
+    f"Hello {STORE_NAME}! "
+    "I would like to order from your nail collection. "
+    "Please share the available designs and details."
+)
+
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+
+st.link_button(
+    "🛍️ Order Now",
+    f"https://wa.me/{WHATSAPP_NUMBER}?text={order_message}",
+    use_container_width=True,
+)
+
+
+# ============================================================
+# 10. ONE CONTACT SECTION ONLY
 # ============================================================
 
 st.markdown(
     f"""
     <div class="contact-box">
-        <h2>📞 Ready to order?</h2>
+
+        <h2>📞 Contact Us</h2>
+
         <p>
             For questions, custom designs, or orders,
             contact us at <b>{PHONE}</b>.
         </p>
+
     </div>
     """,
     unsafe_allow_html=True,
 )
 
-# ONE CONTACT BUTTON ONLY — at the bottom.
+
+# ONE CONTACT BUTTON ONLY
+
 st.link_button(
     "📞 Contact: +92 3289718577",
     f"tel:{PHONE}",
@@ -229,13 +302,14 @@ st.link_button(
 
 
 # ============================================================
-# 10. FOOTER
+# 11. FOOTER
 # ============================================================
 
 st.markdown(
     f"""
     <div class="footer">
-        © 2026 {STORE_NAME} · Beautiful nails, beautiful style 💅
+        © 2026 {STORE_NAME}
+        · Beautiful nails, beautiful style 💅
     </div>
     """,
     unsafe_allow_html=True,
