@@ -11,6 +11,7 @@ st.set_page_config(
     page_title="Nails Collection",
     page_icon="💅",
     layout="wide",
+    initial_sidebar_state="collapsed",
 )
 
 
@@ -24,7 +25,7 @@ WHATSAPP_NUMBER = "923289718577"
 
 
 # ============================================================
-# 3. PRODUCTS
+# 3. PRODUCT COLLECTION
 # ============================================================
 
 PRODUCTS = [
@@ -68,10 +69,8 @@ PRODUCTS = [
 
 
 # ============================================================
-# 4. IMAGE FOLDER PATH
+# 4. FILE PATHS
 # ============================================================
-
-# This makes sure images work correctly on Streamlit Cloud.
 
 BASE_DIR = Path(__file__).parent
 IMAGE_DIR = BASE_DIR / "images"
@@ -85,7 +84,6 @@ st.markdown(
     """
     <style>
 
-    /* Main Website Title */
     .main-title {
         text-align: center;
         font-size: 48px;
@@ -93,14 +91,12 @@ st.markdown(
         margin-bottom: 5px;
     }
 
-    /* Website Subtitle */
     .subtitle {
         text-align: center;
         font-size: 19px;
         margin-bottom: 30px;
     }
 
-    /* Product Name */
     .product-title {
         text-align: center;
         font-size: 20px;
@@ -108,31 +104,20 @@ st.markdown(
         margin-top: 10px;
     }
 
-    /* Product Price */
     .price {
         text-align: center;
-        font-size: 20px;
+        font-size: 22px;
         font-weight: 700;
-        margin: 5px 0;
+        margin: 8px 0;
     }
 
-    /* Product Description */
     .description {
         text-align: center;
-        font-size: 15px;
-        min-height: 48px;
+        font-size: 16px;
+        min-height: 55px;
+        margin-bottom: 12px;
     }
 
-    /* Contact Box */
-    .contact-box {
-        text-align: center;
-        padding: 25px;
-        margin-top: 35px;
-        border-radius: 15px;
-        border: 1px solid rgba(128, 128, 128, 0.35);
-    }
-
-    /* Footer */
     .footer {
         text-align: center;
         margin-top: 35px;
@@ -172,15 +157,14 @@ st.markdown(
 st.markdown("## ✨ Our Nail Collection")
 
 st.write(
-    "Browse our complete collection and choose your favorite design."
+    "Browse our beautiful collection and choose your favorite design."
 )
 
 
 # ============================================================
-# 8. PRODUCT PHOTO GRID
+# 8. PRODUCT DISPLAY
 # ============================================================
 
-# 3 columns = 3 products per row.
 columns = st.columns(3)
 
 
@@ -189,7 +173,7 @@ for index, product in enumerate(PRODUCTS):
     with columns[index % 3]:
 
         # ----------------------------------------------------
-        # Image
+        # Product Image
         # ----------------------------------------------------
 
         image_path = IMAGE_DIR / product["image"]
@@ -223,7 +207,7 @@ for index, product in enumerate(PRODUCTS):
 
 
         # ----------------------------------------------------
-        # Price
+        # Product Price
         # ----------------------------------------------------
 
         st.markdown(
@@ -237,7 +221,7 @@ for index, product in enumerate(PRODUCTS):
 
 
         # ----------------------------------------------------
-        # Description
+        # Product Description
         # ----------------------------------------------------
 
         st.markdown(
@@ -272,27 +256,8 @@ st.link_button(
 
 
 # ============================================================
-# 10. ONE CONTACT SECTION ONLY
+# 10. ONE CONTACT BUTTON ONLY
 # ============================================================
-
-st.markdown(
-    f"""
-    <div class="contact-box">
-
-        <h2>📞 Contact Us</h2>
-
-        <p>
-            For questions, custom designs, or orders,
-            contact us at <b>{PHONE}</b>.
-        </p>
-
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-
-# ONE CONTACT BUTTON ONLY
 
 st.link_button(
     "📞 Contact: +92 3289718577",
