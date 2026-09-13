@@ -71,7 +71,7 @@ PRODUCTS = [
 ]
 
 # ============================================================
-# IMAGE PATH
+# IMAGE DIRECTORY
 # ============================================================
 
 BASE_DIR = Path(__file__).parent
@@ -87,14 +87,20 @@ st.markdown(
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
-html, body, [class*="css"] {
+/* Main font */
+
+html,
+body,
+[data-testid="stAppViewContainer"] {
     font-family: 'DM Sans', sans-serif;
 }
 
+/* Main width */
+
 .block-container {
     max-width: 1180px;
-    padding-top: 1rem;
-    padding-bottom: 3rem;
+    padding-top: 30px;
+    padding-bottom: 50px;
 }
 
 /* Hide Streamlit branding */
@@ -115,116 +121,101 @@ header {
    HERO
    ============================================================ */
 
-.hero {
-    padding: 60px 25px 50px;
+.hero-box {
     text-align: center;
+    padding: 60px 30px;
+    margin-bottom: 45px;
     border-radius: 30px;
     background: linear-gradient(
         135deg,
-        #fff2f6 0%,
-        #ffffff 50%,
-        #f7f1ff 100%
+        #fff2f6,
+        #ffffff,
+        #f7f1ff
     );
-    border: 1px solid #f1dfe6;
-    margin-bottom: 45px;
+    border: 1px solid #f0dfe6;
 }
 
-.eyebrow {
-    color: #ad456c;
+.hero-small {
+    color: #b0446b;
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
-    margin-bottom: 15px;
 }
 
-.hero h1 {
+.hero-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(44px, 6vw, 74px);
+    font-size: 65px;
+    font-weight: 700;
     line-height: 1.05;
-    margin: 0;
-    color: #281d23;
+    color: #2b2026;
+    margin-top: 15px;
 }
 
-.hero h1 span {
-    color: #b24b70;
+.hero-title span {
+    color: #b0446b;
 }
 
-.hero p {
+.hero-description {
     max-width: 700px;
-    margin: 22px auto 0;
+    margin: 20px auto;
     color: #70636a;
     font-size: 18px;
     line-height: 1.7;
 }
 
-.trust-row {
-    display: flex;
-    justify-content: center;
-    gap: 35px;
-    flex-wrap: wrap;
-    margin-top: 28px;
-    color: #5e5158;
-    font-size: 14px;
+.hero-features {
+    margin-top: 25px;
+    color: #5d5057;
     font-weight: 600;
 }
 
 /* ============================================================
-   SECTION TITLES
+   SECTION
    ============================================================ */
 
-.section-title {
+.section-heading {
     font-family: 'Playfair Display', serif;
     font-size: 38px;
-    color: #2a2026;
-    margin: 10px 0 5px;
+    font-weight: 700;
+    color: #2b2026;
+    margin-bottom: 5px;
 }
 
-.section-subtitle {
+.section-text {
     color: #776a72;
     font-size: 16px;
     margin-bottom: 25px;
 }
 
 /* ============================================================
-   PRODUCT
+   PRODUCT CARDS
    ============================================================ */
-
-.product-card {
-    background: #ffffff;
-    border: 1px solid #eee2e7;
-    border-radius: 22px;
-    padding: 12px;
-    margin-bottom: 25px;
-    box-shadow: 0 8px 28px rgba(50, 30, 40, 0.07);
-}
 
 .product-name {
     font-family: 'Playfair Display', serif;
     font-size: 21px;
     font-weight: 700;
     color: #2b2026;
-    margin-top: 14px;
+    margin-top: 12px;
 }
 
-.badge {
+.product-category {
     display: inline-block;
-    padding: 5px 10px;
-    margin-left: 6px;
-    border-radius: 50px;
     background: #fff0f4;
     color: #a04468;
-    font-family: 'DM Sans', sans-serif;
+    border-radius: 30px;
+    padding: 4px 9px;
     font-size: 11px;
     font-weight: 700;
-    vertical-align: middle;
+    margin-left: 5px;
 }
 
-.price {
+.product-price {
     color: #a43f64;
     font-size: 21px;
     font-weight: 700;
-    margin: 8px 0;
+    margin: 7px 0;
 }
 
 .product-description {
@@ -236,72 +227,78 @@ header {
 }
 
 /* ============================================================
-   FEATURE BOXES
+   WHY CHOOSE US
    ============================================================ */
 
 .feature-box {
     text-align: center;
     padding: 28px 18px;
+    min-height: 155px;
     border-radius: 20px;
     background: #fff9fb;
     border: 1px solid #f1e2e7;
-    min-height: 160px;
 }
 
 .feature-icon {
     font-size: 32px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .feature-title {
     font-size: 17px;
     font-weight: 700;
     color: #2d2328;
-    margin-bottom: 7px;
 }
 
-.feature-text {
+.feature-description {
     color: #776b72;
     font-size: 13px;
-    line-height: 1.55;
+    line-height: 1.5;
+    margin-top: 7px;
 }
 
 /* ============================================================
    CTA
    ============================================================ */
 
-.contact-panel {
-    margin-top: 40px;
+.cta-box {
+    text-align: center;
+    margin-top: 45px;
+    margin-bottom: 18px;
     padding: 42px 25px;
     border-radius: 28px;
-    text-align: center;
     background: linear-gradient(
         135deg,
         #2a2026,
         #503945
     );
+}
+
+.cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
     color: white;
 }
 
-.contact-panel h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px;
-    margin: 0 0 10px;
-}
-
-.contact-panel p {
+.cta-description {
     color: #eee1e8;
     font-size: 16px;
-    margin: 0;
+    margin-top: 8px;
 }
 
 /* ============================================================
-   BUTTONS
+   BUTTON SPACING
    ============================================================ */
+
+div[data-testid="stLinkButton"] {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
 
 div[data-testid="stLinkButton"] > a {
     border-radius: 12px !important;
-    min-height: 45px !important;
+    min-height: 46px !important;
     font-weight: 700 !important;
 }
 
@@ -309,11 +306,11 @@ div[data-testid="stLinkButton"] > a {
    FOOTER
    ============================================================ */
 
-.footer {
+.footer-text {
     text-align: center;
     color: #897b83;
     font-size: 13px;
-    padding: 32px 0 5px;
+    margin-top: 35px;
 }
 
 /* ============================================================
@@ -322,20 +319,19 @@ div[data-testid="stLinkButton"] > a {
 
 @media (max-width: 700px) {
 
-    .hero {
+    .hero-box {
         padding: 42px 18px;
-        border-radius: 22px;
     }
 
-    .hero p {
+    .hero-title {
+        font-size: 45px;
+    }
+
+    .hero-description {
         font-size: 16px;
     }
 
-    .trust-row {
-        gap: 15px;
-    }
-
-    .section-title {
+    .section-heading {
         font-size: 31px;
     }
 
@@ -352,23 +348,25 @@ div[data-testid="stLinkButton"] > a {
 
 st.markdown(
     """
-<div class="hero">
-    <div class="eyebrow">Elegant • Stylish • Made for You</div>
+<div class="hero-box">
+    <div class="hero-small">
+        ELEGANT • STYLISH • MADE FOR YOU
+    </div>
 
-    <h1>
+    <div class="hero-title">
         Beautiful Nails.<br>
         <span>Your Style.</span>
-    </h1>
+    </div>
 
-    <p>
+    <div class="hero-description">
         Discover our curated collection of elegant nail designs,
         created to add a beautiful finishing touch to every look.
-    </p>
+    </div>
 
-    <div class="trust-row">
-        <span>✨ Stylish Designs</span>
-        <span>💎 Premium Look</span>
-        <span>💗 Affordable Prices</span>
+    <div class="hero-features">
+        ✨ Stylish Designs&nbsp;&nbsp;&nbsp;
+        💎 Premium Look&nbsp;&nbsp;&nbsp;
+        💗 Affordable Prices
     </div>
 </div>
 """,
@@ -380,12 +378,12 @@ st.markdown(
 # ============================================================
 
 st.markdown(
-    '<div class="section-title">Our Nail Collection</div>',
+    '<div class="section-heading">Our Nail Collection</div>',
     unsafe_allow_html=True,
 )
 
 st.markdown(
-    '<div class="section-subtitle">Find the design that matches your mood, outfit and occasion.</div>',
+    '<div class="section-text">Find the design that matches your mood, outfit and occasion.</div>',
     unsafe_allow_html=True,
 )
 
@@ -414,7 +412,7 @@ else:
     ]
 
 # ============================================================
-# PRODUCT GRID
+# PRODUCT COLLECTION
 # ============================================================
 
 columns = st.columns(3, gap="large")
@@ -423,7 +421,7 @@ for index, product in enumerate(filtered_products):
 
     with columns[index % 3]:
 
-        # Image
+        # Product image
         image_path = IMAGE_DIR / product["image"]
 
         if image_path.exists():
@@ -441,7 +439,9 @@ for index, product in enumerate(filtered_products):
             f"""
 <div class="product-name">
     {product['name']}
-    <span class="badge">{product['category']}</span>
+    <span class="product-category">
+        {product['category']}
+    </span>
 </div>
 """,
             unsafe_allow_html=True,
@@ -450,7 +450,7 @@ for index, product in enumerate(filtered_products):
         # Price
         st.markdown(
             f"""
-<div class="price">
+<div class="product-price">
     PKR {product['price']:,}
 </div>
 """,
@@ -467,8 +467,8 @@ for index, product in enumerate(filtered_products):
             unsafe_allow_html=True,
         )
 
-        # WhatsApp order
-        message = quote(
+        # WhatsApp message
+        order_message = quote(
             f"Hello {STORE_NAME}! "
             f"I would like to order "
             f"{product['name']} "
@@ -476,9 +476,10 @@ for index, product in enumerate(filtered_products):
             f"Please share the order details."
         )
 
+        # Order button
         st.link_button(
             "🛍️ Order This Design",
-            f"https://wa.me/{WHATSAPP_NUMBER}?text={message}",
+            f"https://wa.me/{WHATSAPP_NUMBER}?text={order_message}",
             use_container_width=True,
         )
 
@@ -489,12 +490,12 @@ for index, product in enumerate(filtered_products):
 st.markdown("<br>", unsafe_allow_html=True)
 
 st.markdown(
-    '<div class="section-title">Why Choose Us?</div>',
+    '<div class="section-heading">Why Choose Us?</div>',
     unsafe_allow_html=True,
 )
 
 st.markdown(
-    '<div class="section-subtitle">Simple, stylish and made for a beautiful experience.</div>',
+    '<div class="section-text">Simple, stylish and made for a beautiful experience.</div>',
     unsafe_allow_html=True,
 )
 
@@ -516,7 +517,7 @@ features = [
     ),
 ]
 
-feature_columns = st.columns(3)
+feature_columns = st.columns(3, gap="large")
 
 for column, feature in zip(feature_columns, features):
 
@@ -524,35 +525,47 @@ for column, feature in zip(feature_columns, features):
 
     with column:
 
-        feature_html = f"""
+        st.markdown(
+            f"""
 <div class="feature-box">
     <div class="feature-icon">{icon}</div>
-    <div class="feature-title">{title}</div>
-    <div class="feature-text">{description}</div>
-</div>
-"""
 
-        st.markdown(
-            feature_html,
+    <div class="feature-title">
+        {title}
+    </div>
+
+    <div class="feature-description">
+        {description}
+    </div>
+</div>
+""",
             unsafe_allow_html=True,
         )
 
 # ============================================================
-# CONTACT / CTA
+# CALL TO ACTION
 # ============================================================
 
 st.markdown(
     """
-<div class="contact-panel">
-    <h2>Ready to Find Your Favorite?</h2>
-    <p>Place your order or contact us for more details.</p>
+<div class="cta-box">
+    <div class="cta-title">
+        Ready to Find Your Favorite?
+    </div>
+
+    <div class="cta-description">
+        Place your order or contact us for more details.
+    </div>
 </div>
 """,
     unsafe_allow_html=True,
 )
 
+# Extra spacing
+st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
+
 # ============================================================
-# WHATSAPP BUTTON
+# GENERAL WHATSAPP ORDER
 # ============================================================
 
 general_message = quote(
@@ -568,8 +581,10 @@ st.link_button(
 )
 
 # ============================================================
-# CONTACT BUTTON
+# CONTACT
 # ============================================================
+
+st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
 
 st.link_button(
     f"📞 Contact Us · {PHONE}",
@@ -583,8 +598,9 @@ st.link_button(
 
 st.markdown(
     f"""
-<div class="footer">
-    © 2026 {STORE_NAME} · Beautiful nails, beautiful style 💅
+<div class="footer-text">
+    © 2026 {STORE_NAME}
+    · Beautiful nails, beautiful style 💅
 </div>
 """,
     unsafe_allow_html=True,
