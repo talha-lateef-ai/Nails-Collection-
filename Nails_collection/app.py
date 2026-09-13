@@ -3,11 +3,11 @@ from pathlib import Path
 from urllib.parse import quote
 
 # ============================================================
-# PAGE CONFIG
+# PAGE SETTINGS
 # ============================================================
 
 st.set_page_config(
-    page_title="Nails Collection | Beautiful Nails, Your Style",
+    page_title="Nails Collection",
     page_icon="💅",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -71,45 +71,33 @@ PRODUCTS = [
 ]
 
 # ============================================================
-# IMAGE DIRECTORY
+# PATHS
 # ============================================================
 
-BASE_DIR = Path(__file__).parent
+BASE_DIR = Path(__file__).resolve().parent
 IMAGE_DIR = BASE_DIR / "images"
 
 # ============================================================
-# CUSTOM CSS
+# GLOBAL CSS
 # ============================================================
 
-st.markdown(
+st.html(
     """
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
-/* Main font */
-
-html,
-body,
-[data-testid="stAppViewContainer"] {
-    font-family: 'DM Sans', sans-serif;
+:root {
+    --pink: #b0446b;
+    --dark: #2b2026;
+    --muted: #756970;
+    --light-pink: #fff3f7;
+    --border: #eee1e7;
 }
 
-/* Main width */
-
-.block-container {
-    max-width: 1180px;
-    padding-top: 30px;
-    padding-bottom: 50px;
-}
-
-/* Hide Streamlit branding */
+/* Hide Streamlit default elements */
 
 #MainMenu {
-    visibility: hidden;
-}
-
-footer {
     visibility: hidden;
 }
 
@@ -117,113 +105,135 @@ header {
     visibility: hidden;
 }
 
+footer {
+    visibility: hidden;
+}
+
+/* Main page */
+
+.block-container {
+    max-width: 1180px;
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
 /* ============================================================
    HERO
    ============================================================ */
 
-.hero-box {
+.hero {
     text-align: center;
-    padding: 60px 30px;
-    margin-bottom: 45px;
+    padding: 65px 25px;
     border-radius: 30px;
-    background: linear-gradient(
-        135deg,
-        #fff2f6,
-        #ffffff,
-        #f7f1ff
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #fff1f6 0%,
+            #ffffff 50%,
+            #f7f0ff 100%
+        );
     border: 1px solid #f0dfe6;
+    margin-bottom: 50px;
 }
 
-.hero-small {
-    color: #b0446b;
+.hero-label {
+    color: var(--pink);
+    font-family: "DM Sans", sans-serif;
     font-size: 14px;
     font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 18px;
 }
 
 .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 65px;
-    font-weight: 700;
+    font-family: "Playfair Display", serif;
+    font-size: 68px;
     line-height: 1.05;
-    color: #2b2026;
-    margin-top: 15px;
+    font-weight: 700;
+    color: var(--dark);
 }
 
 .hero-title span {
-    color: #b0446b;
+    color: var(--pink);
 }
 
 .hero-description {
-    max-width: 700px;
-    margin: 20px auto;
-    color: #70636a;
+    max-width: 720px;
+    margin: 22px auto 0;
+    color: var(--muted);
+    font-family: "DM Sans", sans-serif;
     font-size: 18px;
     line-height: 1.7;
 }
 
 .hero-features {
-    margin-top: 25px;
-    color: #5d5057;
+    margin-top: 28px;
+    color: #5f5259;
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
     font-weight: 600;
 }
 
 /* ============================================================
-   SECTION
+   SECTION HEADINGS
    ============================================================ */
 
-.section-heading {
-    font-family: 'Playfair Display', serif;
-    font-size: 38px;
+.section-title {
+    font-family: "Playfair Display", serif;
+    color: var(--dark);
+    font-size: 40px;
     font-weight: 700;
-    color: #2b2026;
     margin-bottom: 5px;
 }
 
-.section-text {
-    color: #776a72;
+.section-subtitle {
+    font-family: "DM Sans", sans-serif;
+    color: var(--muted);
     font-size: 16px;
     margin-bottom: 25px;
 }
 
 /* ============================================================
-   PRODUCT CARDS
+   PRODUCT INFORMATION
    ============================================================ */
 
 .product-name {
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
+    color: var(--dark);
     font-size: 21px;
     font-weight: 700;
-    color: #2b2026;
     margin-top: 12px;
 }
 
 .product-category {
     display: inline-block;
+    margin-left: 7px;
+    padding: 4px 9px;
+    border-radius: 20px;
     background: #fff0f4;
     color: #a04468;
-    border-radius: 30px;
-    padding: 4px 9px;
+    font-family: "DM Sans", sans-serif;
     font-size: 11px;
     font-weight: 700;
-    margin-left: 5px;
+    vertical-align: middle;
 }
 
 .product-price {
     color: #a43f64;
+    font-family: "DM Sans", sans-serif;
     font-size: 21px;
     font-weight: 700;
-    margin: 7px 0;
+    margin-top: 7px;
 }
 
 .product-description {
-    color: #756970;
+    color: var(--muted);
+    font-family: "DM Sans", sans-serif;
     font-size: 14px;
     line-height: 1.6;
-    min-height: 45px;
-    margin-bottom: 15px;
+    min-height: 46px;
+    margin-top: 5px;
+    margin-bottom: 12px;
 }
 
 /* ============================================================
@@ -232,8 +242,8 @@ header {
 
 .feature-box {
     text-align: center;
-    padding: 28px 18px;
-    min-height: 155px;
+    padding: 30px 18px;
+    min-height: 160px;
     border-radius: 20px;
     background: #fff9fb;
     border: 1px solid #f1e2e7;
@@ -241,31 +251,33 @@ header {
 
 .feature-icon {
     font-size: 32px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .feature-title {
+    color: var(--dark);
+    font-family: "DM Sans", sans-serif;
     font-size: 17px;
     font-weight: 700;
-    color: #2d2328;
 }
 
 .feature-description {
-    color: #776b72;
+    color: var(--muted);
+    font-family: "DM Sans", sans-serif;
     font-size: 13px;
-    line-height: 1.5;
-    margin-top: 7px;
+    line-height: 1.55;
+    margin-top: 8px;
 }
 
 /* ============================================================
    CTA
    ============================================================ */
 
-.cta-box {
+.cta {
     text-align: center;
-    margin-top: 45px;
-    margin-bottom: 18px;
-    padding: 42px 25px;
+    margin-top: 55px;
+    margin-bottom: 20px;
+    padding: 48px 25px;
     border-radius: 28px;
     background: linear-gradient(
         135deg,
@@ -275,20 +287,21 @@ header {
 }
 
 .cta-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px;
-    font-weight: 700;
     color: white;
+    font-family: "Playfair Display", serif;
+    font-size: 38px;
+    font-weight: 700;
 }
 
 .cta-description {
     color: #eee1e8;
+    font-family: "DM Sans", sans-serif;
     font-size: 16px;
-    margin-top: 8px;
+    margin-top: 10px;
 }
 
 /* ============================================================
-   BUTTON SPACING
+   BUTTONS
    ============================================================ */
 
 div[data-testid="stLinkButton"] {
@@ -296,9 +309,10 @@ div[data-testid="stLinkButton"] {
     margin-bottom: 8px;
 }
 
-div[data-testid="stLinkButton"] > a {
+div[data-testid="stLinkButton"] a {
     border-radius: 12px !important;
-    min-height: 46px !important;
+    min-height: 48px !important;
+    font-family: "DM Sans", sans-serif !important;
     font-weight: 700 !important;
 }
 
@@ -306,9 +320,10 @@ div[data-testid="stLinkButton"] > a {
    FOOTER
    ============================================================ */
 
-.footer-text {
+.footer {
     text-align: center;
     color: #897b83;
+    font-family: "DM Sans", sans-serif;
     font-size: 13px;
     margin-top: 35px;
 }
@@ -319,8 +334,8 @@ div[data-testid="stLinkButton"] > a {
 
 @media (max-width: 700px) {
 
-    .hero-box {
-        padding: 42px 18px;
+    .hero {
+        padding: 45px 18px;
     }
 
     .hero-title {
@@ -331,25 +346,32 @@ div[data-testid="stLinkButton"] > a {
         font-size: 16px;
     }
 
-    .section-heading {
+    .hero-features {
+        line-height: 2;
+    }
+
+    .section-title {
         font-size: 31px;
     }
 
+    .cta-title {
+        font-size: 30px;
+    }
 }
 
 </style>
-""",
-    unsafe_allow_html=True,
+"""
 )
 
 # ============================================================
-# HERO SECTION
+# HERO
 # ============================================================
 
-st.markdown(
+st.html(
     """
-<div class="hero-box">
-    <div class="hero-small">
+<div class="hero">
+
+    <div class="hero-label">
         ELEGANT • STYLISH • MADE FOR YOU
     </div>
 
@@ -368,23 +390,25 @@ st.markdown(
         💎 Premium Look&nbsp;&nbsp;&nbsp;
         💗 Affordable Prices
     </div>
+
 </div>
-""",
-    unsafe_allow_html=True,
+"""
 )
 
 # ============================================================
-# COLLECTION HEADER
+# COLLECTION TITLE
 # ============================================================
 
-st.markdown(
-    '<div class="section-heading">Our Nail Collection</div>',
-    unsafe_allow_html=True,
-)
+st.html(
+    """
+<div class="section-title">
+    Our Nail Collection
+</div>
 
-st.markdown(
-    '<div class="section-text">Find the design that matches your mood, outfit and occasion.</div>',
-    unsafe_allow_html=True,
+<div class="section-subtitle">
+    Find the design that matches your mood, outfit and occasion.
+</div>
+"""
 )
 
 # ============================================================
@@ -412,7 +436,7 @@ else:
     ]
 
 # ============================================================
-# PRODUCT COLLECTION
+# PRODUCTS
 # ============================================================
 
 columns = st.columns(3, gap="large")
@@ -421,7 +445,7 @@ for index, product in enumerate(filtered_products):
 
     with columns[index % 3]:
 
-        # Product image
+        # Image
         image_path = IMAGE_DIR / product["image"]
 
         if image_path.exists():
@@ -431,55 +455,40 @@ for index, product in enumerate(filtered_products):
             )
         else:
             st.error(
-                f"Image not found: {product['image']}"
+                f"Image missing: {product['image']}"
             )
 
-        # Product name
-        st.markdown(
+        # Product information
+        st.html(
             f"""
 <div class="product-name">
-    {product['name']}
+    {product["name"]}
     <span class="product-category">
-        {product['category']}
+        {product["category"]}
     </span>
 </div>
-""",
-            unsafe_allow_html=True,
-        )
 
-        # Price
-        st.markdown(
-            f"""
 <div class="product-price">
-    PKR {product['price']:,}
+    PKR {product["price"]:,}
 </div>
-""",
-            unsafe_allow_html=True,
-        )
 
-        # Description
-        st.markdown(
-            f"""
 <div class="product-description">
-    {product['description']}
+    {product["description"]}
 </div>
-""",
-            unsafe_allow_html=True,
+"""
         )
 
-        # WhatsApp message
-        order_message = quote(
+        # Product-specific WhatsApp message
+        message = quote(
             f"Hello {STORE_NAME}! "
-            f"I would like to order "
-            f"{product['name']} "
+            f"I would like to order {product['name']} "
             f"for PKR {product['price']:,}. "
             f"Please share the order details."
         )
 
-        # Order button
         st.link_button(
             "🛍️ Order This Design",
-            f"https://wa.me/{WHATSAPP_NUMBER}?text={order_message}",
+            f"https://wa.me/{WHATSAPP_NUMBER}?text={message}",
             use_container_width=True,
         )
 
@@ -487,16 +496,18 @@ for index, product in enumerate(filtered_products):
 # WHY CHOOSE US
 # ============================================================
 
-st.markdown("<br>", unsafe_allow_html=True)
+st.html("<div style='height:35px'></div>")
 
-st.markdown(
-    '<div class="section-heading">Why Choose Us?</div>',
-    unsafe_allow_html=True,
-)
+st.html(
+    """
+<div class="section-title">
+    Why Choose Us?
+</div>
 
-st.markdown(
-    '<div class="section-text">Simple, stylish and made for a beautiful experience.</div>',
-    unsafe_allow_html=True,
+<div class="section-subtitle">
+    Simple, stylish and made for a beautiful experience.
+</div>
+"""
 )
 
 features = [
@@ -525,10 +536,13 @@ for column, feature in zip(feature_columns, features):
 
     with column:
 
-        st.markdown(
+        st.html(
             f"""
 <div class="feature-box">
-    <div class="feature-icon">{icon}</div>
+
+    <div class="feature-icon">
+        {icon}
+    </div>
 
     <div class="feature-title">
         {title}
@@ -537,18 +551,19 @@ for column, feature in zip(feature_columns, features):
     <div class="feature-description">
         {description}
     </div>
+
 </div>
-""",
-            unsafe_allow_html=True,
+"""
         )
 
 # ============================================================
-# CALL TO ACTION
+# CTA
 # ============================================================
 
-st.markdown(
+st.html(
     """
-<div class="cta-box">
+<div class="cta">
+
     <div class="cta-title">
         Ready to Find Your Favorite?
     </div>
@@ -556,16 +571,13 @@ st.markdown(
     <div class="cta-description">
         Place your order or contact us for more details.
     </div>
+
 </div>
-""",
-    unsafe_allow_html=True,
+"""
 )
 
-# Extra spacing
-st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
-
 # ============================================================
-# GENERAL WHATSAPP ORDER
+# GENERAL WHATSAPP BUTTON
 # ============================================================
 
 general_message = quote(
@@ -581,10 +593,8 @@ st.link_button(
 )
 
 # ============================================================
-# CONTACT
+# CONTACT BUTTON
 # ============================================================
-
-st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
 
 st.link_button(
     f"📞 Contact Us · {PHONE}",
@@ -596,12 +606,11 @@ st.link_button(
 # FOOTER
 # ============================================================
 
-st.markdown(
+st.html(
     f"""
-<div class="footer-text">
+<div class="footer">
     © 2026 {STORE_NAME}
     · Beautiful nails, beautiful style 💅
 </div>
-""",
-    unsafe_allow_html=True,
+"""
 )
