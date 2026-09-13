@@ -2,16 +2,18 @@ import streamlit as st
 from pathlib import Path
 from urllib.parse import quote
 
+
 # ============================================================
-# PAGE SETTINGS
+# PAGE CONFIGURATION
 # ============================================================
 
 st.set_page_config(
-    page_title="Nails Collection",
+    page_title="Nails Collection | Beautiful Nails, Your Style",
     page_icon="💅",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
+
 
 # ============================================================
 # STORE INFORMATION
@@ -20,6 +22,7 @@ st.set_page_config(
 STORE_NAME = "Nails Collection"
 PHONE = "+92 3289718577"
 WHATSAPP_NUMBER = "923289718577"
+
 
 # ============================================================
 # PRODUCTS
@@ -70,32 +73,67 @@ PRODUCTS = [
     },
 ]
 
+
 # ============================================================
-# PATHS
+# IMAGE DIRECTORY
 # ============================================================
 
 BASE_DIR = Path(__file__).resolve().parent
 IMAGE_DIR = BASE_DIR / "images"
 
+
 # ============================================================
-# GLOBAL CSS
+# GLOBAL DESIGN / CSS
 # ============================================================
 
 st.html(
     """
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+@import url(
+    'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap'
+);
+
+
+/* ============================================================
+   VARIABLES
+   ============================================================ */
 
 :root {
-    --pink: #b0446b;
+    --rose: #b0446b;
+    --rose-dark: #963957;
+    --rose-light: #fff3f7;
+    --rose-border: #e2b4c4;
+
     --dark: #2b2026;
     --muted: #756970;
-    --light-pink: #fff3f7;
+
+    --gold: #c79a62;
+
     --border: #eee1e7;
 }
 
-/* Hide Streamlit default elements */
+
+/* ============================================================
+   GENERAL PAGE
+   ============================================================ */
+
+html,
+body,
+[data-testid="stAppViewContainer"] {
+    font-family: "DM Sans", sans-serif;
+}
+
+.block-container {
+    max-width: 1180px;
+    padding-top: 30px;
+    padding-bottom: 60px;
+}
+
+
+/* ============================================================
+   HIDE STREAMLIT BRANDING
+   ============================================================ */
 
 #MainMenu {
     visibility: hidden;
@@ -109,70 +147,102 @@ footer {
     visibility: hidden;
 }
 
-/* Main page */
-
-.block-container {
-    max-width: 1180px;
-    padding-top: 30px;
-    padding-bottom: 50px;
-}
 
 /* ============================================================
    HERO
    ============================================================ */
 
 .hero {
+    position: relative;
+    overflow: hidden;
+
     text-align: center;
-    padding: 65px 25px;
-    border-radius: 30px;
+
+    padding: 70px 30px;
+
+    margin-bottom: 55px;
+
+    border-radius: 32px;
+
     background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255, 214, 227, 0.45),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(230, 213, 245, 0.40),
+            transparent 30%
+        ),
         linear-gradient(
             135deg,
-            #fff1f6 0%,
+            #fff4f7,
             #ffffff 50%,
-            #f7f0ff 100%
+            #f8f2ff
         );
-    border: 1px solid #f0dfe6;
-    margin-bottom: 50px;
+
+    border: 1px solid #efdce4;
+
+    box-shadow:
+        0 20px 60px rgba(95, 45, 65, 0.08);
 }
 
+
 .hero-label {
-    color: var(--pink);
-    font-family: "DM Sans", sans-serif;
+    color: var(--rose);
+
     font-size: 14px;
+
     font-weight: 700;
+
     letter-spacing: 4px;
+
     margin-bottom: 18px;
 }
 
+
 .hero-title {
     font-family: "Playfair Display", serif;
+
     font-size: 68px;
+
     line-height: 1.05;
+
     font-weight: 700;
+
     color: var(--dark);
 }
 
+
 .hero-title span {
-    color: var(--pink);
+    color: var(--rose);
 }
+
 
 .hero-description {
     max-width: 720px;
-    margin: 22px auto 0;
+
+    margin: 24px auto 0;
+
     color: var(--muted);
-    font-family: "DM Sans", sans-serif;
+
     font-size: 18px;
+
     line-height: 1.7;
 }
 
+
 .hero-features {
-    margin-top: 28px;
+    margin-top: 30px;
+
     color: #5f5259;
-    font-family: "DM Sans", sans-serif;
+
     font-size: 14px;
+
     font-weight: 600;
 }
+
 
 /* ============================================================
    SECTION HEADINGS
@@ -180,18 +250,49 @@ footer {
 
 .section-title {
     font-family: "Playfair Display", serif;
+
     color: var(--dark);
+
     font-size: 40px;
+
     font-weight: 700;
+
     margin-bottom: 5px;
 }
 
+
 .section-subtitle {
-    font-family: "DM Sans", sans-serif;
     color: var(--muted);
+
     font-size: 16px;
+
     margin-bottom: 25px;
 }
+
+
+/* ============================================================
+   PRODUCT IMAGE
+   ============================================================ */
+
+[data-testid="stImage"] img {
+    border-radius: 18px;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+
+    box-shadow:
+        0 8px 25px rgba(70, 35, 50, 0.08);
+}
+
+
+[data-testid="stImage"] img:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 14px 35px rgba(176, 68, 107, 0.15);
+}
+
 
 /* ============================================================
    PRODUCT INFORMATION
@@ -199,134 +300,302 @@ footer {
 
 .product-name {
     font-family: "Playfair Display", serif;
+
     color: var(--dark);
+
     font-size: 21px;
+
     font-weight: 700;
-    margin-top: 12px;
+
+    margin-top: 14px;
 }
+
 
 .product-category {
     display: inline-block;
+
     margin-left: 7px;
-    padding: 4px 9px;
-    border-radius: 20px;
+
+    padding: 4px 10px;
+
+    border-radius: 30px;
+
     background: #fff0f4;
-    color: #a04468;
+
+    color: var(--rose);
+
     font-family: "DM Sans", sans-serif;
-    font-size: 11px;
+
+    font-size: 10px;
+
     font-weight: 700;
+
+    letter-spacing: 0.5px;
+
     vertical-align: middle;
 }
 
+
 .product-price {
-    color: #a43f64;
-    font-family: "DM Sans", sans-serif;
+    color: var(--rose);
+
     font-size: 21px;
+
     font-weight: 700;
+
     margin-top: 7px;
 }
 
+
 .product-description {
     color: var(--muted);
-    font-family: "DM Sans", sans-serif;
+
     font-size: 14px;
+
     line-height: 1.6;
+
     min-height: 46px;
+
     margin-top: 5px;
-    margin-bottom: 12px;
+
+    margin-bottom: 13px;
 }
+
+
+/* ============================================================
+   PREMIUM ORDER BUTTON
+   ============================================================ */
+
+div[data-testid="stLinkButton"] a {
+
+    position: relative !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    min-height: 48px !important;
+
+    padding: 10px 18px !important;
+
+    border-radius: 14px !important;
+
+    border: 1px solid var(--rose-border) !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #fff5f8 100%
+        ) !important;
+
+    color: var(--rose-dark) !important;
+
+    font-family: "DM Sans", sans-serif !important;
+
+    font-size: 14px !important;
+
+    font-weight: 700 !important;
+
+    letter-spacing: 0.2px !important;
+
+    box-shadow:
+        0 5px 15px rgba(176, 68, 107, 0.08),
+        inset 0 1px 0 rgba(255,255,255,0.9) !important;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease !important;
+
+    text-decoration: none !important;
+}
+
+
+/* Cursor hover */
+
+div[data-testid="stLinkButton"] a:hover {
+
+    transform: translateY(-3px) !important;
+
+    border-color: #b0446b !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffafd 0%,
+            #ffe8f0 100%
+        ) !important;
+
+    color: #963957 !important;
+
+    box-shadow:
+        0 10px 25px rgba(176, 68, 107, 0.18),
+        0 0 0 3px rgba(176, 68, 107, 0.055),
+        inset 0 1px 0 rgba(255,255,255,1) !important;
+}
+
+
+/* Click effect */
+
+div[data-testid="stLinkButton"] a:active {
+
+    transform:
+        translateY(-1px)
+        scale(0.985) !important;
+
+    box-shadow:
+        0 5px 12px rgba(176, 68, 107, 0.14) !important;
+}
+
 
 /* ============================================================
    WHY CHOOSE US
    ============================================================ */
 
 .feature-box {
+
     text-align: center;
-    padding: 30px 18px;
-    min-height: 160px;
-    border-radius: 20px;
-    background: #fff9fb;
-    border: 1px solid #f1e2e7;
+
+    padding: 32px 20px;
+
+    min-height: 165px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fff8fb
+        );
+
+    border: 1px solid #f0dfe6;
+
+    box-shadow:
+        0 8px 25px rgba(80, 40, 55, 0.05);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
 }
+
+
+.feature-box:hover {
+
+    transform: translateY(-5px);
+
+    border-color: #e2b4c4;
+
+    box-shadow:
+        0 15px 35px rgba(176, 68, 107, 0.10);
+}
+
 
 .feature-icon {
-    font-size: 32px;
-    margin-bottom: 10px;
+
+    font-size: 34px;
+
+    margin-bottom: 11px;
 }
 
+
 .feature-title {
+
     color: var(--dark);
-    font-family: "DM Sans", sans-serif;
+
     font-size: 17px;
+
     font-weight: 700;
 }
 
+
 .feature-description {
+
     color: var(--muted);
-    font-family: "DM Sans", sans-serif;
+
     font-size: 13px;
+
     line-height: 1.55;
+
     margin-top: 8px;
 }
+
 
 /* ============================================================
    CTA
    ============================================================ */
 
 .cta {
+
     text-align: center;
-    margin-top: 55px;
-    margin-bottom: 20px;
-    padding: 48px 25px;
-    border-radius: 28px;
-    background: linear-gradient(
-        135deg,
-        #2a2026,
-        #503945
-    );
+
+    margin-top: 60px;
+
+    margin-bottom: 25px;
+
+    padding: 52px 25px;
+
+    border-radius: 30px;
+
+    background:
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(210, 155, 175, 0.15),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #291f25,
+            #503945
+        );
+
+    box-shadow:
+        0 18px 45px rgba(45, 25, 35, 0.15);
 }
 
+
 .cta-title {
+
     color: white;
+
     font-family: "Playfair Display", serif;
+
     font-size: 38px;
+
     font-weight: 700;
 }
 
+
 .cta-description {
+
     color: #eee1e8;
-    font-family: "DM Sans", sans-serif;
+
     font-size: 16px;
+
     margin-top: 10px;
 }
 
-/* ============================================================
-   BUTTONS
-   ============================================================ */
-
-div[data-testid="stLinkButton"] {
-    margin-top: 8px;
-    margin-bottom: 8px;
-}
-
-div[data-testid="stLinkButton"] a {
-    border-radius: 12px !important;
-    min-height: 48px !important;
-    font-family: "DM Sans", sans-serif !important;
-    font-weight: 700 !important;
-}
 
 /* ============================================================
    FOOTER
    ============================================================ */
 
 .footer {
+
     text-align: center;
+
     color: #897b83;
-    font-family: "DM Sans", sans-serif;
+
     font-size: 13px;
-    margin-top: 35px;
+
+    margin-top: 40px;
 }
+
 
 /* ============================================================
    MOBILE
@@ -336,6 +605,8 @@ div[data-testid="stLinkButton"] a {
 
     .hero {
         padding: 45px 18px;
+
+        border-radius: 24px;
     }
 
     .hero-title {
@@ -357,14 +628,16 @@ div[data-testid="stLinkButton"] a {
     .cta-title {
         font-size: 30px;
     }
+
 }
 
 </style>
 """
 )
 
+
 # ============================================================
-# HERO
+# HERO SECTION
 # ============================================================
 
 st.html(
@@ -386,8 +659,10 @@ st.html(
     </div>
 
     <div class="hero-features">
-        ✨ Stylish Designs&nbsp;&nbsp;&nbsp;
-        💎 Premium Look&nbsp;&nbsp;&nbsp;
+        ✨ Stylish Designs
+        &nbsp;&nbsp;&nbsp;
+        💎 Premium Look
+        &nbsp;&nbsp;&nbsp;
         💗 Affordable Prices
     </div>
 
@@ -395,8 +670,9 @@ st.html(
 """
 )
 
+
 # ============================================================
-# COLLECTION TITLE
+# COLLECTION HEADER
 # ============================================================
 
 st.html(
@@ -410,6 +686,7 @@ st.html(
 </div>
 """
 )
+
 
 # ============================================================
 # CATEGORY FILTER
@@ -426,46 +703,65 @@ selected_category = st.segmented_control(
     label_visibility="collapsed",
 )
 
+
 if selected_category == "All":
+
     filtered_products = PRODUCTS
+
 else:
+
     filtered_products = [
         product
         for product in PRODUCTS
         if product["category"] == selected_category
     ]
 
+
 # ============================================================
-# PRODUCTS
+# PRODUCT COLLECTION
 # ============================================================
 
 columns = st.columns(3, gap="large")
+
 
 for index, product in enumerate(filtered_products):
 
     with columns[index % 3]:
 
-        # Image
+        # ----------------------------------------------------
+        # IMAGE
+        # ----------------------------------------------------
+
         image_path = IMAGE_DIR / product["image"]
 
         if image_path.exists():
+
             st.image(
                 str(image_path),
                 use_container_width=True,
             )
+
         else:
+
             st.error(
-                f"Image missing: {product['image']}"
+                f"Image not found: {product['image']}"
             )
 
-        # Product information
+
+        # ----------------------------------------------------
+        # PRODUCT DETAILS
+        # ----------------------------------------------------
+
         st.html(
             f"""
 <div class="product-name">
+
     {product["name"]}
+
     <span class="product-category">
         {product["category"]}
     </span>
+
 </div>
 
 <div class="product-price">
@@ -478,28 +774,35 @@ for index, product in enumerate(filtered_products):
 """
         )
 
-        # Product-specific WhatsApp message
-        message = quote(
+
+        # ----------------------------------------------------
+        # PRODUCT WHATSAPP ORDER
+        # ----------------------------------------------------
+
+        order_message = quote(
             f"Hello {STORE_NAME}! "
-            f"I would like to order {product['name']} "
+            f"I would like to order "
+            f"{product['name']} "
             f"for PKR {product['price']:,}. "
             f"Please share the order details."
         )
 
+
         st.link_button(
-            "🛍️ Order This Design",
-            f"https://wa.me/{WHATSAPP_NUMBER}?text={message}",
+            "🛍️  Order This Design",
+            f"https://wa.me/{WHATSAPP_NUMBER}?text={order_message}",
             use_container_width=True,
         )
+
 
 # ============================================================
 # WHY CHOOSE US
 # ============================================================
 
-st.html("<div style='height:35px'></div>")
-
 st.html(
     """
+<div style="height:45px;"></div>
+
 <div class="section-title">
     Why Choose Us?
 </div>
@@ -509,6 +812,7 @@ st.html(
 </div>
 """
 )
+
 
 features = [
     (
@@ -528,9 +832,17 @@ features = [
     ),
 ]
 
-feature_columns = st.columns(3, gap="large")
 
-for column, feature in zip(feature_columns, features):
+feature_columns = st.columns(
+    3,
+    gap="large",
+)
+
+
+for column, feature in zip(
+    feature_columns,
+    features,
+):
 
     icon, title, description = feature
 
@@ -556,8 +868,9 @@ for column, feature in zip(feature_columns, features):
 """
         )
 
+
 # ============================================================
-# CTA
+# CTA SECTION
 # ============================================================
 
 st.html(
@@ -576,8 +889,9 @@ st.html(
 """
 )
 
+
 # ============================================================
-# GENERAL WHATSAPP BUTTON
+# GENERAL WHATSAPP ORDER
 # ============================================================
 
 general_message = quote(
@@ -586,21 +900,24 @@ general_message = quote(
     "Please share the available designs and details."
 )
 
+
 st.link_button(
-    "🛍️ Order on WhatsApp",
+    "🛍️  Order on WhatsApp",
     f"https://wa.me/{WHATSAPP_NUMBER}?text={general_message}",
     use_container_width=True,
 )
 
+
 # ============================================================
-# CONTACT BUTTON
+# CONTACT
 # ============================================================
 
 st.link_button(
-    f"📞 Contact Us · {PHONE}",
+    f"📞  Contact Us · {PHONE}",
     f"tel:{PHONE}",
     use_container_width=True,
 )
+
 
 # ============================================================
 # FOOTER
@@ -609,8 +926,10 @@ st.link_button(
 st.html(
     f"""
 <div class="footer">
+
     © 2026 {STORE_NAME}
     · Beautiful nails, beautiful style 💅
+
 </div>
 """
 )
