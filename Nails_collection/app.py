@@ -3,11 +3,11 @@ from pathlib import Path
 from urllib.parse import quote
 
 # ============================================================
-# PAGE SETTINGS
+# PAGE CONFIG
 # ============================================================
 
 st.set_page_config(
-    page_title="Nails Collection",
+    page_title="Nails Collection | Beautiful Nails, Your Style",
     page_icon="💅",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -71,45 +71,28 @@ PRODUCTS = [
 ]
 
 # ============================================================
-# PATHS
+# IMAGE DIRECTORY
 # ============================================================
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).parent
 IMAGE_DIR = BASE_DIR / "images"
 
 # ============================================================
-# GLOBAL CSS
+# CUSTOM CSS — PREMIUM THEME
 # ============================================================
 
-st.html(
+st.markdown(
     """
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
 
-:root {
-    --pink: #b0446b;
-    --dark: #2b2026;
-    --muted: #756970;
-    --light-pink: #fff3f7;
-    --border: #eee1e7;
+html,
+body,
+[data-testid="stAppViewContainer"] {
+    font-family: 'DM Sans', sans-serif;
+    background: #fffdfb;
 }
-
-/* Hide Streamlit default elements */
-
-#MainMenu {
-    visibility: hidden;
-}
-
-header {
-    visibility: hidden;
-}
-
-footer {
-    visibility: hidden;
-}
-
-/* Main page */
 
 .block-container {
     max-width: 1180px;
@@ -117,123 +100,139 @@ footer {
     padding-bottom: 50px;
 }
 
+#MainMenu { visibility: hidden; }
+footer { visibility: hidden; }
+header { visibility: hidden; }
+
 /* ============================================================
    HERO
    ============================================================ */
 
-.hero {
+.hero-box {
     text-align: center;
-    padding: 65px 25px;
+    padding: 64px 30px;
+    margin-bottom: 45px;
     border-radius: 30px;
-    background:
-        linear-gradient(
-            135deg,
-            #fff1f6 0%,
-            #ffffff 50%,
-            #f7f0ff 100%
-        );
+    background: linear-gradient(135deg, #fdf1f5, #ffffff 45%, #f6f0fb);
     border: 1px solid #f0dfe6;
-    margin-bottom: 50px;
+    box-shadow: 0 18px 40px -20px rgba(160, 68, 104, 0.25);
+    position: relative;
+    overflow: hidden;
 }
 
-.hero-label {
-    color: var(--pink);
-    font-family: "DM Sans", sans-serif;
-    font-size: 14px;
+.hero-small {
+    color: #b0446b;
+    font-size: 13px;
     font-weight: 700;
     letter-spacing: 4px;
-    margin-bottom: 18px;
+    text-transform: uppercase;
 }
 
 .hero-title {
-    font-family: "Playfair Display", serif;
-    font-size: 68px;
-    line-height: 1.05;
+    font-family: 'Playfair Display', serif;
+    font-size: 65px;
     font-weight: 700;
-    color: var(--dark);
+    line-height: 1.05;
+    color: #2b2026;
+    margin-top: 16px;
 }
 
 .hero-title span {
-    color: var(--pink);
+    background: linear-gradient(120deg, #b0446b, #cc8a4a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .hero-description {
-    max-width: 720px;
-    margin: 22px auto 0;
-    color: var(--muted);
-    font-family: "DM Sans", sans-serif;
+    max-width: 700px;
+    margin: 20px auto;
+    color: #70636a;
     font-size: 18px;
     line-height: 1.7;
 }
 
 .hero-features {
     margin-top: 28px;
-    color: #5f5259;
-    font-family: "DM Sans", sans-serif;
-    font-size: 14px;
+    color: #5d5057;
     font-weight: 600;
+    letter-spacing: 0.3px;
 }
 
 /* ============================================================
-   SECTION HEADINGS
+   SECTION
    ============================================================ */
 
-.section-title {
-    font-family: "Playfair Display", serif;
-    color: var(--dark);
-    font-size: 40px;
+.section-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
     font-weight: 700;
+    color: #2b2026;
     margin-bottom: 5px;
 }
 
-.section-subtitle {
-    font-family: "DM Sans", sans-serif;
-    color: var(--muted);
+.section-text {
+    color: #776a72;
     font-size: 16px;
     margin-bottom: 25px;
 }
 
 /* ============================================================
-   PRODUCT INFORMATION
+   PRODUCT CARDS
    ============================================================ */
 
+div[data-testid="stVerticalBlockBorderWrapper"] {
+    border-radius: 22px !important;
+    border: 1px solid #f0e2e7 !important;
+    background: #ffffff;
+    padding: 6px;
+    box-shadow: 0 10px 28px -18px rgba(60, 30, 45, 0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+div[data-testid="stVerticalBlockBorderWrapper"]:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 38px -18px rgba(160, 68, 104, 0.35);
+}
+
+div[data-testid="stImage"] img {
+    border-radius: 16px;
+}
+
 .product-name {
-    font-family: "Playfair Display", serif;
-    color: var(--dark);
+    font-family: 'Playfair Display', serif;
     font-size: 21px;
     font-weight: 700;
-    margin-top: 12px;
+    color: #2b2026;
+    margin-top: 14px;
 }
 
 .product-category {
     display: inline-block;
-    margin-left: 7px;
-    padding: 4px 9px;
-    border-radius: 20px;
-    background: #fff0f4;
+    background: linear-gradient(120deg, #fff0f4, #fdf3e6);
     color: #a04468;
-    font-family: "DM Sans", sans-serif;
+    border: 1px solid #f2d9e2;
+    border-radius: 30px;
+    padding: 4px 10px;
     font-size: 11px;
     font-weight: 700;
-    vertical-align: middle;
+    letter-spacing: 0.4px;
+    margin-left: 6px;
 }
 
 .product-price {
     color: #a43f64;
-    font-family: "DM Sans", sans-serif;
-    font-size: 21px;
-    font-weight: 700;
-    margin-top: 7px;
+    font-size: 22px;
+    font-weight: 800;
+    margin: 8px 0;
 }
 
 .product-description {
-    color: var(--muted);
-    font-family: "DM Sans", sans-serif;
+    color: #756970;
     font-size: 14px;
     line-height: 1.6;
-    min-height: 46px;
-    margin-top: 5px;
-    margin-bottom: 12px;
+    min-height: 45px;
+    margin-bottom: 15px;
 }
 
 /* ============================================================
@@ -243,61 +242,62 @@ footer {
 .feature-box {
     text-align: center;
     padding: 30px 18px;
-    min-height: 160px;
+    min-height: 155px;
     border-radius: 20px;
-    background: #fff9fb;
+    background: #fffaf9;
     border: 1px solid #f1e2e7;
+    box-shadow: 0 8px 22px -16px rgba(60, 30, 45, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.feature-box:hover {
+    transform: translateY(-3px);
 }
 
 .feature-icon {
-    font-size: 32px;
-    margin-bottom: 10px;
+    font-size: 34px;
+    margin-bottom: 8px;
 }
 
 .feature-title {
-    color: var(--dark);
-    font-family: "DM Sans", sans-serif;
     font-size: 17px;
     font-weight: 700;
+    color: #2d2328;
 }
 
 .feature-description {
-    color: var(--muted);
-    font-family: "DM Sans", sans-serif;
+    color: #776b72;
     font-size: 13px;
-    line-height: 1.55;
-    margin-top: 8px;
+    line-height: 1.5;
+    margin-top: 7px;
 }
 
 /* ============================================================
    CTA
    ============================================================ */
 
-.cta {
+.cta-box {
     text-align: center;
-    margin-top: 55px;
-    margin-bottom: 20px;
-    padding: 48px 25px;
+    margin-top: 45px;
+    margin-bottom: 18px;
+    padding: 46px 25px;
     border-radius: 28px;
-    background: linear-gradient(
-        135deg,
-        #2a2026,
-        #503945
-    );
+    background: linear-gradient(135deg, #2a2026, #503945);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 22px 44px -20px rgba(0, 0, 0, 0.45);
 }
 
 .cta-title {
-    color: white;
-    font-family: "Playfair Display", serif;
-    font-size: 38px;
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
     font-weight: 700;
+    color: white;
 }
 
 .cta-description {
     color: #eee1e8;
-    font-family: "DM Sans", sans-serif;
     font-size: 16px;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 /* ============================================================
@@ -309,21 +309,26 @@ div[data-testid="stLinkButton"] {
     margin-bottom: 8px;
 }
 
-div[data-testid="stLinkButton"] a {
+div[data-testid="stLinkButton"] > a {
     border-radius: 12px !important;
-    min-height: 48px !important;
-    font-family: "DM Sans", sans-serif !important;
+    min-height: 46px !important;
     font-weight: 700 !important;
+    letter-spacing: 0.3px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+div[data-testid="stLinkButton"] > a:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px -10px rgba(160, 68, 104, 0.55);
 }
 
 /* ============================================================
    FOOTER
    ============================================================ */
 
-.footer {
+.footer-text {
     text-align: center;
     color: #897b83;
-    font-family: "DM Sans", sans-serif;
     font-size: 13px;
     margin-top: 35px;
 }
@@ -333,45 +338,25 @@ div[data-testid="stLinkButton"] a {
    ============================================================ */
 
 @media (max-width: 700px) {
-
-    .hero {
-        padding: 45px 18px;
-    }
-
-    .hero-title {
-        font-size: 45px;
-    }
-
-    .hero-description {
-        font-size: 16px;
-    }
-
-    .hero-features {
-        line-height: 2;
-    }
-
-    .section-title {
-        font-size: 31px;
-    }
-
-    .cta-title {
-        font-size: 30px;
-    }
+    .hero-box { padding: 42px 18px; }
+    .hero-title { font-size: 45px; }
+    .hero-description { font-size: 16px; }
+    .section-heading { font-size: 31px; }
 }
 
 </style>
-"""
+""",
+    unsafe_allow_html=True,
 )
 
 # ============================================================
-# HERO
+# HERO SECTION
 # ============================================================
 
-st.html(
+st.markdown(
     """
-<div class="hero">
-
-    <div class="hero-label">
+<div class="hero-box">
+    <div class="hero-small">
         ELEGANT • STYLISH • MADE FOR YOU
     </div>
 
@@ -390,25 +375,23 @@ st.html(
         💎 Premium Look&nbsp;&nbsp;&nbsp;
         💗 Affordable Prices
     </div>
-
 </div>
-"""
+""",
+    unsafe_allow_html=True,
 )
 
 # ============================================================
-# COLLECTION TITLE
+# COLLECTION HEADER
 # ============================================================
 
-st.html(
-    """
-<div class="section-title">
-    Our Nail Collection
-</div>
+st.markdown(
+    '<div class="section-heading">Our Nail Collection</div>',
+    unsafe_allow_html=True,
+)
 
-<div class="section-subtitle">
-    Find the design that matches your mood, outfit and occasion.
-</div>
-"""
+st.markdown(
+    '<div class="section-text">Find the design that matches your mood, outfit and occasion.</div>',
+    unsafe_allow_html=True,
 )
 
 # ============================================================
@@ -419,12 +402,20 @@ categories = ["All"] + sorted(
     {product["category"] for product in PRODUCTS}
 )
 
+# st.segmented_control requires Streamlit >= 1.32. If you're on an
+# older version this line will raise an AttributeError — upgrade with
+# `pip install --upgrade streamlit` if that happens.
 selected_category = st.segmented_control(
     "Browse by style",
     categories,
     default="All",
     label_visibility="collapsed",
 )
+
+# segmented_control returns None if the user deselects everything —
+# fall back to "All" instead of showing an empty page.
+if not selected_category:
+    selected_category = "All"
 
 if selected_category == "All":
     filtered_products = PRODUCTS
@@ -436,78 +427,98 @@ else:
     ]
 
 # ============================================================
-# PRODUCTS
+# PRODUCT COLLECTION
 # ============================================================
 
-columns = st.columns(3, gap="large")
+if not filtered_products:
+    st.info("No designs found in this category yet.")
+else:
+    columns = st.columns(3, gap="large")
 
-for index, product in enumerate(filtered_products):
+    for index, product in enumerate(filtered_products):
 
-    with columns[index % 3]:
+        with columns[index % 3]:
 
-        # Image
-        image_path = IMAGE_DIR / product["image"]
+            # Bordered container = the "premium card" wrapper
+            with st.container(border=True):
 
-        if image_path.exists():
-            st.image(
-                str(image_path),
-                use_container_width=True,
-            )
-        else:
-            st.error(
-                f"Image missing: {product['image']}"
-            )
+                # Product image
+                image_path = IMAGE_DIR / product["image"]
 
-        # Product information
-        st.html(
-            f"""
+                if image_path.exists():
+                    st.image(
+                        str(image_path),
+                        use_container_width=True,
+                    )
+                else:
+                    st.error(
+                        f"Image not found: {product['image']}"
+                    )
+
+                # Product name
+                st.markdown(
+                    f"""
 <div class="product-name">
-    {product["name"]}
+    {product['name']}
     <span class="product-category">
-        {product["category"]}
+        {product['category']}
     </span>
 </div>
+""",
+                    unsafe_allow_html=True,
+                )
 
+                # Price
+                st.markdown(
+                    f"""
 <div class="product-price">
-    PKR {product["price"]:,}
+    PKR {product['price']:,}
 </div>
+""",
+                    unsafe_allow_html=True,
+                )
 
+                # Description
+                st.markdown(
+                    f"""
 <div class="product-description">
-    {product["description"]}
+    {product['description']}
 </div>
-"""
-        )
+""",
+                    unsafe_allow_html=True,
+                )
 
-        # Product-specific WhatsApp message
-        message = quote(
-            f"Hello {STORE_NAME}! "
-            f"I would like to order {product['name']} "
-            f"for PKR {product['price']:,}. "
-            f"Please share the order details."
-        )
+                # WhatsApp message
+                order_message = quote(
+                    f"Hello {STORE_NAME}! "
+                    f"I would like to order "
+                    f"{product['name']} "
+                    f"for PKR {product['price']:,}. "
+                    f"Please share the order details."
+                )
 
-        st.link_button(
-            "🛍️ Order This Design",
-            f"https://wa.me/{WHATSAPP_NUMBER}?text={message}",
-            use_container_width=True,
-        )
+                # Order button — unique key avoids duplicate-widget
+                # errors if products ever share the same name.
+                st.link_button(
+                    "🛍️ Order This Design",
+                    f"https://wa.me/{WHATSAPP_NUMBER}?text={order_message}",
+                    use_container_width=True,
+                )
 
 # ============================================================
 # WHY CHOOSE US
 # ============================================================
 
-st.html("<div style='height:35px'></div>")
+st.markdown("<br>", unsafe_allow_html=True)
 
-st.html(
-    """
-<div class="section-title">
-    Why Choose Us?
-</div>
+st.markdown(
+    '<div class="section-heading">Why Choose Us?</div>',
+    unsafe_allow_html=True,
+)
 
-<div class="section-subtitle">
-    Simple, stylish and made for a beautiful experience.
-</div>
-"""
+st.markdown(
+    '<div class="section-text">Simple, stylish and made for a beautiful experience.</div>',
+    unsafe_allow_html=True,
 )
 
 features = [
@@ -536,13 +547,10 @@ for column, feature in zip(feature_columns, features):
 
     with column:
 
-        st.html(
+        st.markdown(
             f"""
 <div class="feature-box">
-
-    <div class="feature-icon">
-        {icon}
-    </div>
+    <div class="feature-icon">{icon}</div>
 
     <div class="feature-title">
         {title}
@@ -551,19 +559,18 @@ for column, feature in zip(feature_columns, features):
     <div class="feature-description">
         {description}
     </div>
-
 </div>
-"""
+""",
+            unsafe_allow_html=True,
         )
 
 # ============================================================
-# CTA
+# CALL TO ACTION
 # ============================================================
 
-st.html(
+st.markdown(
     """
-<div class="cta">
-
+<div class="cta-box">
     <div class="cta-title">
         Ready to Find Your Favorite?
     </div>
@@ -571,13 +578,16 @@ st.html(
     <div class="cta-description">
         Place your order or contact us for more details.
     </div>
-
 </div>
-"""
+""",
+    unsafe_allow_html=True,
 )
 
+# Extra spacing
+st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
+
 # ============================================================
-# GENERAL WHATSAPP BUTTON
+# GENERAL WHATSAPP ORDER
 # ============================================================
 
 general_message = quote(
@@ -593,8 +603,10 @@ st.link_button(
 )
 
 # ============================================================
-# CONTACT BUTTON
+# CONTACT
 # ============================================================
+
+st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
 
 st.link_button(
     f"📞 Contact Us · {PHONE}",
@@ -606,11 +618,12 @@ st.link_button(
 # FOOTER
 # ============================================================
 
-st.html(
+st.markdown(
     f"""
-<div class="footer">
+<div class="footer-text">
     © 2026 {STORE_NAME}
     · Beautiful nails, beautiful style 💅
 </div>
-"""
+""",
+    unsafe_allow_html=True,
 )
